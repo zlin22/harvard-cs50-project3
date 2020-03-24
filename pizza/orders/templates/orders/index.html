@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Menu</title>
+  </head>
+  <body>
+
+    {% if not username %}
+      <h1>Login to place order</h1>
+
+      <form action="{% url 'login' %}" method="post">
+          {% csrf_token %}
+          <input name="username" type="text"/>
+          <input name="password" type="password"/>
+          <input type="submit" value="Login"/>
+      </form>
+      <a href="{% url 'create_account' %}">Create new account</a>
+    {% endif %}
+
+    {% if message %}
+        <div>
+            {{ message }}
+        </div>
+    {% endif %}
+
+    <h1>Menu</h1>
+    {% for item in items %}
+      <p>{{ item }} <br> {{item.desc}}</p>
+    {% endfor %}
+
+    {% if username %}
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Logout"/>
+    </form>
+    {% endif %}
+
+  </body>
+</html>
