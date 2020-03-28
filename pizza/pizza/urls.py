@@ -20,3 +20,5 @@ urlpatterns = [
     path("", include("orders.urls")),
     path("admin/", admin.site.urls),
 ]
+
+admin.site.site_header = "Pinocchio's Pizza Manager"

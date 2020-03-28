@@ -3,6 +3,10 @@
   <head>
     <meta charset="utf-8">
     <title>Menu</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'orders/styles.css' %}">
   </head>
   <body>
 
@@ -25,15 +29,136 @@
     {% endif %}
 
     <h1>Menu</h1>
-    {% for item in items %}
-      <p>{{ item }} <br> {{item.desc}}</p>
-    {% endfor %}
+    <h2><a href="{% url 'view_cart' %}">Go to cart</a></h2>
+
+      <h2>Regular Pizza</h2>
+      <table class="table table-sm">
+        <tr>
+          <th></th>
+          <th>Small</th>
+          <th>Large</th>
+        </tr>
+        {% for item in items %}
+        {% if item.category == "Regular Pizza" %}
+          {% if item.size == "Small" %}
+          <tr>
+            <td>{{item.name}}</td>
+            <td>{{item.price}} <a href="{% url 'add_to_cart_item' item.id%}"><button>Add to Cart</button></a></td>
+          {% else %}
+            <td>{{item.price}} <a href="{% url 'add_to_cart_item' item.id%}"><button>Add to Cart</button></a></td>
+          </tr>
+          {% endif %}
+          
+        {% endif %}
+        {% endfor %}     
+      </table>
+
+      <h2>Sicilian Pizza</h2>
+      <table class="table table-sm">
+        <tr>
+          <th></th>
+          <th>Small</th>
+          <th>Large</th>
+        </tr>
+        {% for item in items %}
+        {% if item.category == "Sicilian Pizza" %}
+          {% if item.size == "Small" %}
+          <tr>
+            <td>{{item.name}}</td>
+            <td>{{item.price}} <a href="{% url 'add_to_cart_item' item.id%}"><button>Add to Cart</button></a></td>
+          {% else %}
+            <td>{{item.price}} <a href="{% url 'add_to_cart_item' item.id%}"><button>Add to Cart</button></a></td>
+          </tr>
+          {% endif %}
+          
+        {% endif %}
+        {% endfor %}     
+      </table>
+
+      <h2>Toppings</h2>
+      <table class="table table-sm">
+        {% for i in additions %}
+          <tr>
+            <td>{{i}}</td>
+          </tr>          
+        {% endfor %}     
+      </table>
+
+      <h2>Subs</h2>
+      <table class="table table-sm">
+        <tr>
+          <th></th>
+          <th>Small</th>
+          <th>Large</th>
+        </tr>
+        {% for item in items %}
+        {% if item.category == "Subs" %}
+          {% if item.size == "Small" %}
+          <tr>
+            <td>{{item.name}}</td>
+            <td>{{item.price}} <a href="{% url 'add_to_cart_item' item.id%}"><button>Add to Cart</button></a></td>
+          {% else %}
+            <td>{{item.price}} <a href="{% url 'add_to_cart_item' item.id%}"><button>Add to Cart</button></a></td>
+          </tr>
+          {% endif %}
+          
+        {% endif %}
+        {% endfor %}     
+      </table>
+      
+      <h2>Pasta</h2>
+      <table class="table table-sm">
+        {% for item in items %}
+        {% if item.category == "Pasta" %}
+          <tr>
+            <td>{{item.name}}</td>
+            <td>{{item.price}} <a href="{% url 'add_to_cart_item' item.id%}"><button>Add to Cart</button></a></td>
+          </tr>
+        {% endif %}
+        {% endfor %}     
+      </table>
+
+      <h2>Salads</h2>
+      <table class="table table-sm">
+        {% for item in items %}
+        {% if item.category == "Salad" %}
+          <tr>
+            <td>{{item.name}}</td>
+            <td>{{item.price}} <a href="{% url 'add_to_cart_item' item.id%}"><button>Add to Cart</button></a></td>
+          </tr>
+        {% endif %}
+        {% endfor %}     
+      </table>
+
+      <h2>Dinner Platter</h2>
+      <table class="table table-sm">
+        <tr>
+          <th></th>
+          <th>Small</th>
+          <th>Large</th>
+        </tr>
+        {% for item in items %}
+        {% if item.category == "Dinner Platter" %}
+          {% if item.size == "Small" %}
+          <tr>
+            <td>{{item.name}}</td>
+            <td>{{item.price}} <a href="{% url 'add_to_cart_item' item.id%}"><button>Add to Cart</button></a></td>
+          {% else %}
+            <td>{{item.price}} <a href="{% url 'add_to_cart_item' item.id%}"><button>Add to Cart</button></a></td>
+          </tr>
+          {% endif %}
+          
+        {% endif %}
+        {% endfor %}     
+      </table>
 
     {% if username %}
+    <h2><a href="{% url 'view_cart' %}">Go to cart</a></h2>
     <form action="{% url 'logout' %}" method="post">
         {% csrf_token %}
         <input type="submit" value="Logout"/>
     </form>
+
     {% endif %}
 
   </body>

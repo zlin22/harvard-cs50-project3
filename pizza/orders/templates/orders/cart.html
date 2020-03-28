@@ -1,0 +1,28 @@
+{% extends "orders/base.html" %}
+
+{% block title %}
+Cart
+{% endblock %}
+
+{% block content %}
+<h1>Cart</h1>
+
+{% for item in order_items %}
+    <div>{{ item }}  
+        {% if item.menu_item_addition.all %}
+            with
+        {% endif %}
+        {% for addition in item.menu_item_addition.all %}
+            <li>{{ addition }}</li>
+        {% endfor %}
+    </div>
+{% endfor %}
+
+<h5>Grand total: ${{ grand_total }}</h5>
+
+<div><a href="{% url 'pay' %}"><button>Checkout</button></a></div>
+
+<div><a href="{% url 'index' %}">Go back</a></div>
+
+
+{% endblock %}
